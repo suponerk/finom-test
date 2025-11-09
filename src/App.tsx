@@ -1,56 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Modal from './components/Modal'
+import { useState } from "react";
+import "./App.css";
+import { Modal, Banner } from "./components";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleAction = () => {
-    alert('Action button clicked!')
-    setIsModalOpen(false)
-  }
+  const handleApplyClick = () => {
+    setIsLoading(true);
+    // Simulate an async operation
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsModalOpen(false);
+    }, 2000);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Finom test task </h1>
+      <a
+        href="https://t.eu.lever-analytics.com/email-link?dest=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUgcpwc0BaIBTmtZzWvRAvn%2FMarkup-banking-test%3Fnode-id%3D1871-3078&eid=a1227e68-1b85-45b3-b150-1a5b630704c5&idx=0&token=w-1jgpq9850vQdFBLnCv0JMdoOs"
+        target="_blank"
+      >
+        Figma design and description
+      </a>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+        <h3>Technical note:</h3>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          It is not pixel perfect since dev access has not been provided and I
+          can't read the exact values from figma. Only presentation mode is
+          available. I can't get exact css from it and guessed some values.
         </p>
-        <button onClick={() => setIsModalOpen(true)}>
-          Open Modal
-        </button>
+        <p>
+          As well as dev time is limited. But it is possible to improve it given
+          access.
+        </p>
+        <p>Thanks!</p>
+        <br />
+        <h4>Click on the button below to open the modal:</h4>
+        <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <p className="author">Author: Zakharov Andrei</p>
 
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onAction={handleAction}
-        actionLabel="Confirm"
-        title="Example Modal"
+        title="Get the Business Funding You Need"
       >
-        <p>This is the modal content. You can put any component or content here.</p>
-        <p>Click outside the modal, press Escape, or click the X button to close.</p>
+        <Banner onApplyClick={handleApplyClick} isLoading={isLoading} />
       </Modal>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
